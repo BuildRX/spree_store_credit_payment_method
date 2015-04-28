@@ -8,7 +8,7 @@ class Spree::VirtualGiftCard < ActiveRecord::Base
   before_create :set_redemption_code, unless: -> { redemption_code }
 
 
-  validates :amount, numericality: { greater_than: 0 }
+  validates_numericality_of :amount
   validates_uniqueness_of :redemption_code, conditions: -> { where(redeemed_at: nil) }
   validates_presence_of :purchaser_id, :line_item_id
 
