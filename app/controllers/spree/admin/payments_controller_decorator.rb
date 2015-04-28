@@ -25,6 +25,7 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
                                    response_code: auth_code)
 
       else
+        flash[:error] = Spree.t("admin.store_credits.no_store_credit_selected")
         redirect_to spree.admin_order_payments_path(@order) and return false
       end
     end
