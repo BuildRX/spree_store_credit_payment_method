@@ -15,7 +15,8 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
               category_id: 1,
               memo: 'Store Credit',
               created_by: @order.user,
-              action_originator: @order.user
+              action_originator: @order.user,
+              currency: Spree::Config[:currency]
             }
           )
           store_credit.save
