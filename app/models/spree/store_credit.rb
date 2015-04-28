@@ -15,8 +15,8 @@ class Spree::StoreCredit < ActiveRecord::Base
   has_many :store_credit_events
 
   validates_presence_of :user_id, :category_id, :type_id, :created_by_id
-  validates_numericality_of :amount, { greater_than_or_equal_to: 0 }
-  validates_numericality_of :amount_used, { greater_than_or_equal_to: 0 }
+  validates_numericality_of :amount
+  validates_numericality_of :amount_used
   validate :amount_used_less_than_or_equal_to_amount
   validate :amount_authorized_less_than_or_equal_to_amount
 
