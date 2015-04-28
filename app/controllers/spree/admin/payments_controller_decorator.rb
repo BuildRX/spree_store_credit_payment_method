@@ -6,7 +6,7 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
 
   def load_user_store_credits
     @store_credits = if @order.user
-      @order.user.store_credits.reject { |store_credit| store_credit.amount_remaining.zero? }
+      @order.user.store_credits
     end
   end
 
@@ -25,7 +25,6 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
                                    response_code: auth_code)
 
       else
-        flash[:error] = Spree.t("admin.store_credits.no_store_credit_selected")
         redirect_to spree.admin_order_payments_path(@order) and return false
       end
     end
