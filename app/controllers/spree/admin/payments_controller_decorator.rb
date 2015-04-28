@@ -6,7 +6,20 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
 
   def load_user_store_credits
     @store_credits = if @order.user
-      @order.user.store_credits
+      sc = @order.user.store_credits
+      
+      if sc.count == 0
+         @store_credit = @order.user.store_credits.build(
+            {
+              amount: 0,
+              category_id: 1,
+              memo: 'Store Credit',
+              created_by: @order.user,
+              action_originator: @order.user
+            }
+          )
+      end
+      sc
     end
   end
 
