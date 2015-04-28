@@ -9,7 +9,7 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
       sc = @order.user.store_credits
       
       if sc.count == 0
-         @store_credit = @order.user.store_credits.build(
+         store_credit = @order.user.store_credits.build(
             {
               amount: 0,
               category_id: 1,
@@ -18,6 +18,8 @@ module SpreeStoreCredits::AdminPaymentsControllerDecorator
               action_originator: @order.user
             }
           )
+          store_credit.save
+          sc = @order.user.store_credits
       end
       sc
     end
